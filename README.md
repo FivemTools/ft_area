@@ -1,1 +1,1 @@
-# ft_area
+# ft_areas
