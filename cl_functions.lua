@@ -1,14 +1,15 @@
 -- @Date:   2017-06-14T18:57:49+02:00
 -- @Project: FiveM Tools
--- @Last modified time: 2017-06-15T16:36:55+02:00
+-- @Last modified time: 2017-06-24T19:53:52+02:00
 -- @License: GNU General Public License v3.0
 
 Areas = {}
+Areas.current = nil
 
-function Add(name, area)
+function Add(name, value)
   Citizen.CreateThread(function()
 
-    Areas[name] = Area(area)
+    Areas[name] = Area(value)
 
   end)
 end

@@ -1,6 +1,6 @@
 -- @Date:   2017-06-15T16:30:17+02:00
 -- @Project: FiveM Tools
--- @Last modified time: 2017-06-16T18:18:43+02:00
+-- @Last modified time: 2017-06-24T20:45:14+02:00
 -- @License: GNU General Public License v3.0
 
 -- Constructor
@@ -17,9 +17,9 @@ setmetatable(Area, {
     p.enable = data.enable or false
     p.weight = data.weight or 2.0
     p.height = data.height or 2.0
-    p.enter = {}
-    p.exit = {}
-    p.active = {}
+    p.enter = data.enter or {}
+    p.exit = data.exit or {}
+    p.active = data.active or {}
     return setmetatable(p, Area)
   end
 })
@@ -33,13 +33,11 @@ function Area:Enter()
     end
 
     if self.enter.eventClient ~= nil then
-      local callback = self.enter.callback
-      callback()
+      TriggerEvent(self.enter.eventClient)
     end
 
     if self.enter.eventServer ~= nil then
-      local callback = self.enter.callback
-      callback()
+      TriggerServerEvent(self.enter.eventServer)
     end
 
   end)
@@ -48,18 +46,17 @@ end
 function Area:Active()
   Citizen.CreateThread(function()
 
-    if self.active.callBack ~= nil then
-      self.active.callBack()
+    if self.active.callback ~= nil then
+      local callback = self.active.callback
+      callback()
     end
 
     if self.active.eventClient ~= nil then
-      local callback = self.active.callback
-      callback()
+      TriggerEvent(self.active.eventClient)
     end
 
     if self.active.eventServer ~= nil then
-      local callback = self.active.callback
-      callback()
+      TriggerServerEvent(self.active.eventServer)
     end
 
   end)
@@ -68,18 +65,17 @@ end
 function Area:Exit()
   Citizen.CreateThread(function()
 
-    if self.exit.callBack ~= nil then
-      self.exit.callBack()
+    if self.exit.callback ~= nil then
+      local callback = self.exit.callback
+      callback()
     end
 
     if self.exit.eventClient ~= nil then
-      local callback = self.exit.callback
-      callback()
+      TriggerEvent(self.exit.eventClient)
     end
 
     if self.exit.eventServer ~= nil then
-      local callback = self.exit.callback
-      callback()
+      TriggerServerEvent(self.exit.eventServer)
     end
 
   end)
