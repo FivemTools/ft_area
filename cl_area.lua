@@ -1,6 +1,6 @@
 -- @Date:   2017-06-15T16:30:17+02:00
 -- @Project: FiveM Tools
--- @Last modified time: 2017-06-24T20:45:14+02:00
+-- @Last modified time: 2017-07-10T21:05:21+02:00
 -- @License: GNU General Public License v3.0
 
 -- Constructor
@@ -20,6 +20,7 @@ setmetatable(Area, {
     p.enter = data.enter or {}
     p.exit = data.exit or {}
     p.active = data.active or {}
+    p.data = data.data or {}
     return setmetatable(p, Area)
   end
 })
@@ -29,15 +30,15 @@ function Area:Enter()
 
     if self.enter.callback ~= nil then
       local callback = self.enter.callback
-      callback()
+      callback(self.enter.data)
     end
 
     if self.enter.eventClient ~= nil then
-      TriggerEvent(self.enter.eventClient)
+      TriggerEvent(self.enter.eventClient, self.enter.data)
     end
 
     if self.enter.eventServer ~= nil then
-      TriggerServerEvent(self.enter.eventServer)
+      TriggerServerEvent(self.enter.eventServer, self.enter.data)
     end
 
   end)
