@@ -1,6 +1,4 @@
--- @Date:   2017-06-14T19:01:51+02:00
 -- @Project: FiveM Tools
--- @Last modified time: 2017-07-10T21:07:31+02:00
 -- @License: GNU General Public License v3.0
 
 Citizen.CreateThread(function()
@@ -21,12 +19,12 @@ Citizen.CreateThread(function()
 
           if player_in and Areas.current ~= name then
             Areas.current = name
-            area:Enter()
+            area.Enter()
           elseif player_in and Areas.current == name then
-            area:Active()
+            area.Active()
           elseif not player_in and Areas.current == name then
             Areas.current = nil
-            area:Exit()
+            area.Exit()
           end
         end
 
